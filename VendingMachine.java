@@ -30,7 +30,7 @@ public class VendingMachine
             amount = userInput.nextInt();
         }
 
-        while (amount % 1 != 0)
+        while (amount % 1 != 0 || amount < 0)
         {
             System.out.print("\nWe only except $1 bills. Please insert a valid amount: ");
             amount = userInput.nextInt();
@@ -45,13 +45,19 @@ public class VendingMachine
     //Sets the amount of money when item is purchased
     public void setMoney(int amount)
     {
-        //code
+        money = amount;
     }
 
-    //Returns item bought
-    public Item vendItem(Item item)
+    public int getMoney()
     {
-        return item;
+        return money;
+    }
+    //Returns item bought
+    public Item vendItem(int index)
+    {
+        setMoney(money - itemList.get(index).getPrice());
+        System.out.println("You purchased " + itemList.get(index).getName());
+        return itemList.remove(index);
     }
 
     //Returns change
@@ -59,6 +65,14 @@ public class VendingMachine
     {
         return 0;
     }
+
+    public void printItems()
+    {
+        for (int i = 0; i < getItems().size(); i++)
+        {
+            System.out.println((i+1)+". "+ getItem(i).getName() + "; Price: " + getItem(i).getPrice());
+        }
+    } 
 }
 
 

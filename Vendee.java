@@ -34,7 +34,7 @@ public class Vendee
 
     public void addItem(Item item)
     {
-        //code
+        itemList.add(item);
     }
 
     public List<Item> getItems()
