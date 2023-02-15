@@ -7,7 +7,7 @@ public class VendingMachine
 
     public void addItem(Item name)
     {
-        //code
+        
     }
 
     //Sets the initial amount of money entered into machine
