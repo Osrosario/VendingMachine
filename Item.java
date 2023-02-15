@@ -2,10 +2,10 @@ public class Item
 {
     //initial variable(s)
     private String name;
-    private Integer price;
+    private int price;
 
     //Constructor
-    public Item(String name, Integer price)
+    public Item(String name, int price)
     {
         this.name = name;
         this.price = price;
@@ -18,7 +18,7 @@ public class Item
     }    
     
     //Returns the price of the item
-    public Integer getPrice()
+    public int getPrice()
     {
         return price;
     }

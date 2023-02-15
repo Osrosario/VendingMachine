@@ -4,30 +4,41 @@ public class Vendee
 {
     //Initial variable(s)
     private String name;
-    private Integer wallet;
+    private int wallet;
     private List<Item> itemList;
 
     //Constructor
-    public Vendee(String name, Integer wallet)
+    public Vendee(String name, int wallet)
     {
         this.name = name;
         this.wallet = wallet;
+        itemList = new ArrayList<Item>();
     }
 
     //Sets the intial amount of money
     public void setWallet(Integer amount)
     {
-        //code
+        wallet = wallet - amount;
     }
 
     //Returns the amount of money
-    public Integer getWallet()
+    public int getWallet()
     {
-        return 0;
+        return wallet;
     }
 
-    public void addItem(Item name)
+    public String getName()
+    {
+        return name;
+    }
+
+    public void addItem(Item item)
     {
         //code
+    }
+
+    public List<Item> getItems()
+    {
+        return itemList;
     }
 }
