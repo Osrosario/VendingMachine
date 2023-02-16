@@ -15,10 +15,16 @@ public class Vendee
         itemList = new ArrayList<Item>();
     }
 
-    //Sets the intial amount of money
-    public void setWallet(Integer amount)
+    //Adds money to wallet
+    public void addMoney(Integer amount)
     {
-        wallet = wallet - amount;
+        wallet += amount;
+    }
+
+    //Subtracts money from wallet
+    public void removeMoney(Integer amount)
+    {
+        wallet -= amount;
     }
 
     //Returns the amount of money
@@ -30,15 +36,5 @@ public class Vendee
     public String getName()
     {
         return name;
-    }
-
-    public void addItem(Item item)
-    {
-        itemList.add(item);
-    }
-
-    public List<Item> getItems()
-    {
-        return itemList;
     }
 }

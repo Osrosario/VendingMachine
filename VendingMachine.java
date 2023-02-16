@@ -3,22 +3,19 @@ import java.util.*;
 public class VendingMachine 
 {
     private static Scanner userInput = new Scanner(System.in);
-    private List<Item> itemList = new ArrayList<Item>();
+    private List<Item> vendItems = new ArrayList<Item>();
+    private List<Item> itemsToBuy = new ArrayList<Item>();
     private int money;
     
-    public void addItem(Item item)
+    public VendingMachine()
     {
-        itemList.add(item);
-    }
+        Item chips = new Item("Chips", 2);
+        Item soda = new Item( "Cola", 1);
+        Item water = new Item( "Water", 1);
 
-    public Item getItem(int index)
-    {
-        return itemList.get(index);
-    }
-
-    public List<Item> getItems()
-    {
-        return itemList;
+        vendItems.add(water);
+        vendItems.add(soda);
+        vendItems.add(chips);
     }
 
     //Sets the initial amount of money entered into machine
@@ -36,28 +33,42 @@ public class VendingMachine
             amount = userInput.nextInt();
         }
 
-        vendee.setWallet(amount);
-        setMoney(amount);
+        vendee.removeMoney(amount);
+        money = amount;
 
         System.out.println("You've inserted " + amount + " dollars.");
     }
 
-    //Sets the amount of money when item is purchased
+    public List<Item> getVendItems()
+    {
+        return vendItems;
+    }
+
+    public void chooseItem(int index)
+    {
+        itemsToBuy.add(vendItems.get(index));
+        removeMoney(vendItems.get(index).getPrice());
+        vendItems.remove(index);
+    }
+
+    public List<Item> itemsToBuy()
+    {
+        return itemsToBuy;
+    }
+
     public void setMoney(int amount)
     {
         money = amount;
     }
 
+    public void removeMoney(int amount)
+    {
+        money -= amount;
+    }
+
     public int getMoney()
     {
         return money;
-    }
-    //Returns item bought
-    public Item vendItem(int index)
-    {
-        setMoney(money - itemList.get(index).getPrice());
-        System.out.println("You purchased " + itemList.get(index).getName());
-        return itemList.remove(index);
     }
 
     //Returns change
@@ -68,9 +79,16 @@ public class VendingMachine
 
     public void printItems()
     {
-        for (int i = 0; i < getItems().size(); i++)
+        System.out.println("\nMoney Left: $" + money);
+        for (int i = 0; i < vendItems.size(); i++)
         {
-            System.out.println((i+1)+". "+ getItem(i).getName() + "; Price: " + getItem(i).getPrice());
+            System.out.println((i + 1) + ". " + vendItems.get(i).getName() + " - $" + vendItems.get(i).getPrice());
+        }
+
+        System.out.println("\nSelected:");
+        for (int i = 0; i < itemsToBuy.size(); i++)
+        {
+            System.out.println(itemsToBuy.get(i).getName() + " - $" + itemsToBuy.get(i).getPrice());
         }
     } 
 }
