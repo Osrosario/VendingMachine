@@ -84,53 +84,80 @@ public class VendingMachineApp
             vendingMachine.printItems();
 
             System.out.println("\nWhat would you like to purchase?");
-            System.out.print("Please enter a number: ");
+            System.out.print("Please enter a number or '0' to cancel order: ");
             int answer = Integer.parseInt(validateInt());
 
             if (answer - 1 > vendingMachine.getVendItems().size())
             {
                 answer = vendingMachine.getVendItems().size();
             }
-
-            vendingMachine.chooseItem(answer - 1);
-
-            vendingMachine.printItems();
-        
-            System.out.println("\nWould you like to purchase something else?");
-            System.out.print("Please enter 'y' or 'n': ");
-            String answer2 = validateString();
-
-            if (answer2.equals("n"))
+            
+            if (answer >= 1 && answer <= vendingMachine.getVendItems().size())
             {
-                System.out.println("\nConfirm order?");
-                System.out.print("Please enter 'y' or 'n': ");
-                String answer3 = validateString();
+                vendingMachine.chooseItem(answer - 1);
 
-                if (answer3.equals("y"))
+                vendingMachine.printItems();
+            
+                System.out.println("\nWould you like to purchase something else?");
+                System.out.print("Please enter 'y', 'n', or 'c' to cancel order: ");
+                String answer2 = validateString();
+
+                if (answer2.equals("n"))
                 {
-                    System.out.println("\nAre you sure?");
-                    System.out.print("Please enter 'y' or 'n': ");
-                    String answer4 = validateString();
+                    System.out.println("\nConfirm order?");
+                    System.out.print("Please enter 'y', 'n', or 'c' to cancel order: ");
+                    String answer3 = validateString();
 
-                    if(answer4.equals("y"))
+                    if (answer3.equals("y"))
                     {
-                        if (vendingMachine.getMoney() == 0 ){
-                            System.out.println("Thank you for your purchase(s)!");
-                            System.out.println("Have a nice day!");
-                        }
-                        else
+                        System.out.println("\nAre you sure?");
+                        System.out.print("Please enter 'y', 'n', or 'c' to cancel order: ");
+                        String answer4 = validateString();
+
+                        if(answer4.equals("y"))
                         {
-                            vendee.addMoney(vendingMachine.getMoney());
-                            vendingMachine.setMoney(0);
-                            System.out.println("Refunding money..." + vendee.getWallet());
-                            System.out.println("Come again!");
+                            if (vendingMachine.getMoney() == 0 )
+                            {
+                                System.out.println("\nThank you for your purchase(s)!");
+                                System.out.println("Good choices! Have a nice day!");
+                            }
+                            else
+                            {
+                                vendee.addMoney(vendingMachine.getMoney());
+                                System.out.println("\nRefunding money... " + vendingMachine.getMoney());
+                                Thread.sleep(2000);
+                                vendingMachine.setMoney(0);
+                                System.out.println("Good chocies! Come again!");
+                            }
                         }
                     }
-                }
+                    else if (answer2.equals("c"))
+                    {
+                        vendee.addMoney(vendingMachine.getMoney());
+                        System.out.println("\nRefunding money... " + vendingMachine.getMoney());
+                        Thread.sleep(2000);
+                        vendingMachine.setMoney(0);
+                        System.out.println("Good choices! Come again!");
+                    }  
+                } 
+                else if (answer2.equals("c"))
+                {
+                    vendee.addMoney(vendingMachine.getMoney());
+                    System.out.println("\nRefunding money... " + vendingMachine.getMoney());
+                    Thread.sleep(2000);
+                    vendingMachine.setMoney(0);
+                    System.out.println("Good choices! Come again!");
+                }            
             }
-                        
+            else if (answer <= 0)
+            {
+                vendee.addMoney(vendingMachine.getMoney());
+                System.out.println("\nRefunding money... " + vendingMachine.getMoney());
+                Thread.sleep(2000);
+                vendingMachine.setMoney(0);
+                System.out.println("Have a nice day! Please consider Victor's Vending Machines in the future!");
+            }
         }
-    }
-            
+    }      
 }
            

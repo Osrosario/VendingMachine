@@ -80,6 +80,7 @@ public class VendingMachine
     public void printItems()
     {
         System.out.println("\nMoney Left: $" + money);
+        System.out.println("\nAvailable Items:");
         for (int i = 0; i < vendItems.size(); i++)
         {
             System.out.println((i + 1) + ". " + vendItems.get(i).getName() + " - $" + vendItems.get(i).getPrice());
