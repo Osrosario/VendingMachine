@@ -62,7 +62,7 @@ public class VendingMachineApp
         return sb.toString();
     }
     
-    public static void main(String[] args) 
+    public static void main(String[] args) throws InterruptedException 
     {
         System.out.println("\nWelcome to the Victor's Vending Machine!");
 
@@ -102,10 +102,35 @@ public class VendingMachineApp
 
             if (answer2.equals("n"))
             {
-                vendee.addMoney(vendingMachine.getMoney());
-                vendingMachine.setMoney(0);
-            }        
+                System.out.println("\nConfirm order?");
+                System.out.print("Please enter 'y' or 'n': ");
+                String answer3 = validateString();
+
+                if (answer3.equals("y"))
+                {
+                    System.out.println("\nAre you sure?");
+                    System.out.print("Please enter 'y' or 'n': ");
+                    String answer4 = validateString();
+
+                    if(answer4.equals("y"))
+                    {
+                        if (vendingMachine.getMoney() == 0 ){
+                            System.out.println("Thank you for your purchase(s)!");
+                            System.out.println("Have a nice day!");
+                        }
+                        else
+                        {
+                            vendee.addMoney(vendingMachine.getMoney());
+                            vendingMachine.setMoney(0);
+                            System.out.println("Refunding money..." + vendee.getWallet());
+                            System.out.println("Come again!");
+                        }
+                    }
+                }
+            }
+                        
         }
     }
+            
 }
-
+           
